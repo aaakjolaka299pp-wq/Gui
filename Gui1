@@ -252,6 +252,100 @@ function NapoleonGUI.new(options)
     content.Parent = main
     self._content  = content
 
+    -- ── Watermark "N" ──
+    local bigN = create("TextLabel", {
+        Text      = "N",
+        Size      = UDim2.new(1, 0, 1, 0),
+        BackgroundTransparency = 1,
+        TextColor3 = self.theme.accent,
+        TextTransparency = 0.945,
+        Font      = Enum.Font.GothamBlack,
+        TextSize  = 280,
+        ZIndex    = 0,
+        TextXAlignment = Enum.TextXAlignment.Right,
+        TextYAlignment = Enum.TextYAlignment.Center,
+    })
+    bigN.Parent = content
+    self._bigN = bigN
+
+    -- ── Anime Girl ──
+    local animeContainer = create("Frame", {
+        Name            = "AnimeGirl",
+        Size            = UDim2.new(0.8, 0, 1.6, 0),
+        Position        = UDim2.new(0.2, 0, -0.3, 0),
+        BackgroundTransparency = 1,
+        ZIndex          = 0,
+    })
+    animeContainer.Parent = content
+
+    -- Gradient overlays (blend with body color)
+    local gradLeft = create("Frame", {
+        Size     = UDim2.new(1, 0, 1, 0),
+        BackgroundColor3 = self.theme.body,
+        ZIndex   = 1,
+    })
+    create("UIGradient", {
+        Transparency = NumberSequence.new({
+            NumberSequenceKeypoint.new(0, 0),
+            NumberSequenceKeypoint.new(0.15, 0.18),
+            NumberSequenceKeypoint.new(0.38, 0.65),
+            NumberSequenceKeypoint.new(0.6, 0.92),
+            NumberSequenceKeypoint.new(0.8, 1),
+            NumberSequenceKeypoint.new(1, 1),
+        }),
+        Rotation = 0,
+    }).Parent = gradLeft
+    gradLeft.Parent = animeContainer
+
+    local gradBottom = create("Frame", {
+        Size     = UDim2.new(1, 0, 1, 0),
+        BackgroundColor3 = self.theme.body,
+        ZIndex   = 1,
+    })
+    create("UIGradient", {
+        Transparency = NumberSequence.new({
+            NumberSequenceKeypoint.new(0, 0),
+            NumberSequenceKeypoint.new(0.05, 0.45),
+            NumberSequenceKeypoint.new(0.2, 1),
+            NumberSequenceKeypoint.new(1, 1),
+        }),
+        Rotation = 90,
+    }).Parent = gradBottom
+    gradBottom.Parent = animeContainer
+
+    local gradTop = create("Frame", {
+        Size     = UDim2.new(1, 0, 1, 0),
+        BackgroundColor3 = self.theme.body,
+        ZIndex   = 1,
+    })
+    create("UIGradient", {
+        Transparency = NumberSequence.new({
+            NumberSequenceKeypoint.new(0, 0),
+            NumberSequenceKeypoint.new(0.1, 0.75),
+            NumberSequenceKeypoint.new(0.26, 1),
+            NumberSequenceKeypoint.new(1, 1),
+        }),
+        Rotation = 270,
+    }).Parent = gradTop
+    gradTop.Parent = animeContainer
+
+    -- Anime image
+    local animeImg = create("ImageLabel", {
+        Image    = "https://cdn.discordapp.com/attachments/1398827590805880894/1512964892674621501/98c0aa84e93321ecafb74fbd050aded1.jpg",
+        Size     = UDim2.new(0.95, 0, 1.25, 0),
+        Position = UDim2.new(0.05, 0, -0.01, 0),
+        BackgroundTransparency = 1,
+        ScaleType = Enum.ScaleType.Fit,
+        ImageTransparency = 0.1,
+        ZIndex   = 0,
+    })
+    animeImg.Parent = animeContainer
+    self._animeImg = animeImg
+    self._animeContainer = animeContainer
+    self._gradLeft = gradLeft
+    self._gradBottom = gradBottom
+    self._gradTop = gradTop
+
     -- ── Status Bar ──
     local statusBar = create("Frame", {
         Name     = "StatusBar",
@@ -966,11 +1060,17 @@ function NapoleonGUI:SetTheme(name)
     if not t then return end
     self.themeName = name
     self.theme     = t
-    -- Update key visual colors
-    tween(self._main,    { BackgroundColor3 = t.body   }, 0.3)
-    -- Badge
+    tween(self._main, { BackgroundColor3 = t.body }, 0.3)
     self._badgeLabel.Text = name:upper()
     tween(self._badgeLabel, { TextColor3 = t.accent }, 0.2)
+    if self._bigN then
+        tween(self._bigN, { TextColor3 = t.accent }, 0.3)
+    end
+    if self._gradLeft then
+        tween(self._gradLeft,   { BackgroundColor3 = t.body }, 0.3)
+        tween(self._gradBottom, { BackgroundColor3 = t.body }, 0.3)
+        tween(self._gradTop,    { BackgroundColor3 = t.body }, 0.3)
+    end
 end
 
 -- ══════════════════════════════════════════════════════════════
@@ -984,3 +1084,4 @@ end
 NapoleonGUI.Themes = THEMES
 
 return NapoleonGUI
+
