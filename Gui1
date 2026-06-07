@@ -1,31 +1,31 @@
--- ╔══════════════════════════════════════════════════════════╗
--- ║           NAPOLEON GUI  v10.0  —  Library                ║
--- ║           Discord: napoleon.sc  |  For: YTTA             ║
--- ╚══════════════════════════════════════════════════════════╝
+-- ╔══════════════════════════════════════════════════════════════╗
+-- ║           NAPOLEON GUI  v11.0  —  Library                   ║
+-- ║           Discord: napoleon.sc  |  For: YTTA                ║
+-- ╚══════════════════════════════════════════════════════════════╝
 
 local NapoleonGUI = {}
 NapoleonGUI.__index = NapoleonGUI
 
 -- ── Services ──────────────────────────────────────────────────
-local Players        = game:GetService("Players")
-local TweenService   = game:GetService("TweenService")
+local Players          = game:GetService("Players")
+local TweenService     = game:GetService("TweenService")
 local UserInputService = game:GetService("UserInputService")
-local RunService     = game:GetService("RunService")
+local RunService       = game:GetService("RunService")
 
 local LocalPlayer = Players.LocalPlayer
 local Mouse       = LocalPlayer:GetMouse()
 
 -- ── THEMES ────────────────────────────────────────────────────
 local THEMES = {
-    Blue    = { accent = Color3.fromHex("7c6fff"), bar = Color3.fromHex("16162a"), body = Color3.fromHex("1b1b2e"), sidebar = Color3.fromHex("14142a"), panel = Color3.fromHex("20203a") },
-    Red     = { accent = Color3.fromHex("e53935"), bar = Color3.fromHex("1a1010"), body = Color3.fromHex("1e1515"), sidebar = Color3.fromHex("181010"), panel = Color3.fromHex("251818") },
-    Purple  = { accent = Color3.fromHex("c060e0"), bar = Color3.fromHex("170e28"), body = Color3.fromHex("1c1230"), sidebar = Color3.fromHex("150d24"), panel = Color3.fromHex("221638") },
-    Green   = { accent = Color3.fromHex("00c97a"), bar = Color3.fromHex("0d1a14"), body = Color3.fromHex("101c17"), sidebar = Color3.fromHex("0e1915"), panel = Color3.fromHex("152318") },
-    Void    = { accent = Color3.fromHex("a0f0ff"), bar = Color3.fromHex("080d12"), body = Color3.fromHex("0c1118"), sidebar = Color3.fromHex("090d14"), panel = Color3.fromHex("111820") },
-    Crimson = { accent = Color3.fromHex("ff3355"), bar = Color3.fromHex("160508"), body = Color3.fromHex("1a080c"), sidebar = Color3.fromHex("140508"), panel = Color3.fromHex("200810") },
-    Aurora  = { accent = Color3.fromHex("00ffb3"), bar = Color3.fromHex("091512"), body = Color3.fromHex("0d1a17"), sidebar = Color3.fromHex("0a1613"), panel = Color3.fromHex("12201d") },
-    Emerald = { accent = Color3.fromHex("50fa7b"), bar = Color3.fromHex("091208"), body = Color3.fromHex("0d180b"), sidebar = Color3.fromHex("0b150a"), panel = Color3.fromHex("13210e") },
-    Inferno = { accent = Color3.fromHex("ff9500"), bar = Color3.fromHex("120900"), body = Color3.fromHex("170c00"), sidebar = Color3.fromHex("130800"), panel = Color3.fromHex("1e0f00") },
+    Blue    = { accent = Color3.fromHex("7c6fff"), bar = Color3.fromHex("0f0f1e"), body = Color3.fromHex("16162a"), sidebar = Color3.fromHex("0e0e1c"), panel = Color3.fromHex("1b1b30"), sectionBg = Color3.fromHex("1e1e34"), rowBg = Color3.fromHex("191929"), inputBg = Color3.fromHex("12121f") },
+    Red     = { accent = Color3.fromHex("e53935"), bar = Color3.fromHex("110808"), body = Color3.fromHex("1a1010"), sidebar = Color3.fromHex("0f0808"), panel = Color3.fromHex("201414"), sectionBg = Color3.fromHex("241515"), rowBg = Color3.fromHex("1d1111"), inputBg = Color3.fromHex("0e0909") },
+    Purple  = { accent = Color3.fromHex("c060e0"), bar = Color3.fromHex("100a1a"), body = Color3.fromHex("170e28"), sidebar = Color3.fromHex("0e0919"), panel = Color3.fromHex("1c1232"), sectionBg = Color3.fromHex("201538"), rowBg = Color3.fromHex("19102c"), inputBg = Color3.fromHex("0d0814") },
+    Green   = { accent = Color3.fromHex("00c97a"), bar = Color3.fromHex("080f0c"), body = Color3.fromHex("0d1a14"), sidebar = Color3.fromHex("08110d"), panel = Color3.fromHex("122318"), sectionBg = Color3.fromHex("15271c"), rowBg = Color3.fromHex("111f17"), inputBg = Color3.fromHex("080e0b") },
+    Void    = { accent = Color3.fromHex("a0f0ff"), bar = Color3.fromHex("04070a"), body = Color3.fromHex("080d12"), sidebar = Color3.fromHex("050810"), panel = Color3.fromHex("0c1118"), sectionBg = Color3.fromHex("0f141c"), rowBg = Color3.fromHex("0a1016"), inputBg = Color3.fromHex("050809") },
+    Crimson = { accent = Color3.fromHex("ff3355"), bar = Color3.fromHex("0e0305"), body = Color3.fromHex("160508"), sidebar = Color3.fromHex("0c0304"), panel = Color3.fromHex("1a0710"), sectionBg = Color3.fromHex("1e0a13"), rowBg = Color3.fromHex("18060e"), inputBg = Color3.fromHex("0a0305") },
+    Aurora  = { accent = Color3.fromHex("00ffb3"), bar = Color3.fromHex("060e0c"), body = Color3.fromHex("091512"), sidebar = Color3.fromHex("07100e"), panel = Color3.fromHex("0e1f1b"), sectionBg = Color3.fromHex("11231f"), rowBg = Color3.fromHex("0d1c19"), inputBg = Color3.fromHex("060e0c") },
+    Emerald = { accent = Color3.fromHex("50fa7b"), bar = Color3.fromHex("060c05"), body = Color3.fromHex("091208"), sidebar = Color3.fromHex("071009"), panel = Color3.fromHex("0d180b"), sectionBg = Color3.fromHex("101e0e"), rowBg = Color3.fromHex("0e1a0c"), inputBg = Color3.fromHex("060b05") },
+    Inferno = { accent = Color3.fromHex("ff9500"), bar = Color3.fromHex("0a0600"), body = Color3.fromHex("120900"), sidebar = Color3.fromHex("0d0600"), panel = Color3.fromHex("180e00"), sectionBg = Color3.fromHex("1c1100"), rowBg = Color3.fromHex("160c00"), inputBg = Color3.fromHex("0a0600") },
 }
 
 -- ── Utilities ─────────────────────────────────────────────────
@@ -53,8 +53,8 @@ end
 
 local function makeStroke(color, thickness, transparency)
     return create("UIStroke", {
-        Color = color,
-        Thickness = thickness or 1,
+        Color        = color,
+        Thickness    = thickness or 1,
         Transparency = transparency or 0.7,
     })
 end
@@ -62,12 +62,12 @@ end
 -- ── Dragging ──────────────────────────────────────────────────
 local function makeDraggable(frame, handle)
     handle = handle or frame
-    local dragging, dragInput, dragStart, startPos = false, nil, nil, nil
+    local dragging, dragStart, startPos = false, nil, nil
     handle.InputBegan:Connect(function(input)
         if input.UserInputType == Enum.UserInputType.MouseButton1 then
-            dragging   = true
-            dragStart  = input.Position
-            startPos   = frame.Position
+            dragging  = true
+            dragStart = input.Position
+            startPos  = frame.Position
         end
     end)
     handle.InputEnded:Connect(function(input)
@@ -79,10 +79,8 @@ local function makeDraggable(frame, handle)
         if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
             local delta = input.Position - dragStart
             frame.Position = UDim2.new(
-                startPos.X.Scale,
-                startPos.X.Offset + delta.X,
-                startPos.Y.Scale,
-                startPos.Y.Offset + delta.Y
+                startPos.X.Scale, startPos.X.Offset + delta.X,
+                startPos.Y.Scale, startPos.Y.Offset + delta.Y
             )
         end
     end)
@@ -95,7 +93,6 @@ function NapoleonGUI.new(options)
     options = options or {}
     local self = setmetatable({}, NapoleonGUI)
 
-    -- Config
     self.themeName  = options.Theme    or "Blue"
     self.title      = options.Title    or "Napoleon"
     self.subtitle   = options.Subtitle or "YTTA"
@@ -106,136 +103,215 @@ function NapoleonGUI.new(options)
 
     -- ── ScreenGui ──
     local screenGui = create("ScreenGui", {
-        Name              = "NapoleonGUI",
-        ResetOnSpawn      = false,
-        ZIndexBehavior    = Enum.ZIndexBehavior.Sibling,
-        DisplayOrder      = 999,
+        Name           = "NapoleonGUI",
+        ResetOnSpawn   = false,
+        ZIndexBehavior = Enum.ZIndexBehavior.Sibling,
+        DisplayOrder   = 999,
     })
-
-    -- Try to parent to CoreGui (executor), fallback to PlayerGui
-    local ok = pcall(function()
-        screenGui.Parent = game:GetService("CoreGui")
-    end)
-    if not ok then
-        screenGui.Parent = LocalPlayer:WaitForChild("PlayerGui")
-    end
+    local ok = pcall(function() screenGui.Parent = game:GetService("CoreGui") end)
+    if not ok then screenGui.Parent = LocalPlayer:WaitForChild("PlayerGui") end
     self._screenGui = screenGui
 
     -- ── Main Frame ──
+    -- Matches reference: wider sidebar, slightly taller
     local main = create("Frame", {
-        Name            = "MainFrame",
-        Size            = UDim2.new(0, 640, 0, 420),
-        Position        = UDim2.new(0.5, -320, 0.5, -210),
+        Name             = "MainFrame",
+        Size             = UDim2.new(0, 650, 0, 440),
+        Position         = UDim2.new(0.5, -325, 0.5, -220),
         BackgroundColor3 = self.theme.body,
-        BorderSizePixel = 0,
+        BorderSizePixel  = 0,
         ClipsDescendants = true,
-    }, { makeCorner(8) })
+    }, { makeCorner(10) })
     main.Parent = screenGui
     self._main = main
 
-    makeStroke(self.theme.accent, 1, 0.78).Parent = main
+    makeStroke(self.theme.accent, 1, 0.72).Parent = main
 
     -- ── Title Bar ──
     local titleBar = create("Frame", {
-        Name            = "TitleBar",
-        Size            = UDim2.new(1, 0, 0, 36),
+        Name             = "TitleBar",
+        Size             = UDim2.new(1, 0, 0, 38),
         BackgroundColor3 = self.theme.bar,
-        BorderSizePixel = 0,
+        BorderSizePixel  = 0,
     })
     titleBar.Parent = main
-    makeStroke(self.theme.accent, 1, 0.85).Parent = titleBar
 
-    -- Logo text
-    local logo = create("TextLabel", {
-        Text      = "// " .. self.title .. "  |  " .. self.subtitle,
-        Size      = UDim2.new(0, 220, 1, 0),
-        Position  = UDim2.new(0, 10, 0, 0),
+    -- Bottom border line on title bar
+    create("Frame", {
+        Size             = UDim2.new(1, 0, 0, 1),
+        Position         = UDim2.new(0, 0, 1, -1),
+        BackgroundColor3 = self.theme.accent,
+        BackgroundTransparency = 0.82,
+        BorderSizePixel  = 0,
+    }).Parent = titleBar
+
+    -- Logo: "//" in accent, then title | subtitle
+    local logoSlash = create("TextLabel", {
+        Text      = "//",
+        Size      = UDim2.new(0, 22, 1, 0),
+        Position  = UDim2.new(0, 12, 0, 0),
         BackgroundTransparency = 1,
         TextColor3 = self.theme.accent,
         TextXAlignment = Enum.TextXAlignment.Left,
         Font      = Enum.Font.GothamBold,
+        TextSize  = 14,
+    })
+    logoSlash.Parent = titleBar
+
+    local logoTitle = create("TextLabel", {
+        Text      = " " .. self.title .. "  |  " .. self.subtitle,
+        Size      = UDim2.new(0, 220, 1, 0),
+        Position  = UDim2.new(0, 32, 0, 0),
+        BackgroundTransparency = 1,
+        TextColor3 = Color3.fromRGB(230, 230, 240),
+        TextXAlignment = Enum.TextXAlignment.Left,
+        Font      = Enum.Font.GothamBold,
         TextSize  = 13,
     })
-    logo.Parent = titleBar
+    logoTitle.Parent = titleBar
+    self._logoSlash = logoSlash
 
-    -- Theme badge (center)
-    local badgeFrame = create("Frame", {
-        Size     = UDim2.new(0, 90, 0, 20),
-        Position = UDim2.new(0.5, -45, 0.5, -10),
-        BackgroundColor3 = self.theme.accent,
-        BackgroundTransparency = 0.85,
-    }, { makeCorner(4) })
-    badgeFrame.Parent = titleBar
-    makeStroke(self.theme.accent, 1, 0.65).Parent = badgeFrame
-
-    local badgeLabel = create("TextLabel", {
-        Text      = self.themeName:upper(),
-        Size      = UDim2.new(1, 0, 1, 0),
-        BackgroundTransparency = 1,
-        TextColor3 = self.theme.accent,
+    -- Right-side window controls (minimize / maximize / close)
+    -- Minimize
+    local minBtn = create("TextButton", {
+        Text      = "−",
+        Size      = UDim2.new(0, 20, 0, 20),
+        Position  = UDim2.new(1, -72, 0.5, -10),
+        BackgroundColor3 = Color3.fromRGB(25, 25, 40),
+        TextColor3 = Color3.fromRGB(80, 80, 100),
         Font      = Enum.Font.GothamBold,
-        TextSize  = 10,
-    })
-    badgeLabel.Parent = badgeFrame
-    self._badgeLabel = badgeLabel
-    self._badgeFrame = badgeFrame
+        TextSize  = 13,
+        BorderSizePixel = 0,
+    }, { makeCorner(4) })
+    minBtn.Parent = titleBar
+    local minimized = false
+    minBtn.MouseButton1Click:Connect(function()
+        minimized = not minimized
+        if minimized then
+            tween(main, { Size = UDim2.new(0, 650, 0, 38) }, 0.22, Enum.EasingStyle.Quad)
+        else
+            tween(main, { Size = UDim2.new(0, 650, 0, 440) }, 0.22, Enum.EasingStyle.Back, Enum.EasingDirection.Out)
+        end
+    end)
+    minBtn.MouseEnter:Connect(function() tween(minBtn, { BackgroundColor3 = Color3.fromRGB(45,45,65) }, 0.1) end)
+    minBtn.MouseLeave:Connect(function() tween(minBtn, { BackgroundColor3 = Color3.fromRGB(25,25,40) }, 0.1) end)
 
-    -- Close button
-    local closeBtn = create("TextButton", {
-        Text      = "✕",
-        Size      = UDim2.new(0, 22, 0, 22),
-        Position  = UDim2.new(1, -28, 0.5, -11),
-        BackgroundColor3 = Color3.fromRGB(30, 30, 46),
+    -- Maximize (visual only)
+    local maxBtn = create("TextButton", {
+        Text      = "⤢",
+        Size      = UDim2.new(0, 20, 0, 20),
+        Position  = UDim2.new(1, -48, 0.5, -10),
+        BackgroundColor3 = Color3.fromRGB(25, 25, 40),
         TextColor3 = Color3.fromRGB(80, 80, 100),
         Font      = Enum.Font.Gotham,
         TextSize  = 11,
         BorderSizePixel = 0,
-    }, { makeCorner(3) })
+    }, { makeCorner(4) })
+    maxBtn.Parent = titleBar
+    maxBtn.MouseEnter:Connect(function() tween(maxBtn, { BackgroundColor3 = Color3.fromRGB(45,45,65) }, 0.1) end)
+    maxBtn.MouseLeave:Connect(function() tween(maxBtn, { BackgroundColor3 = Color3.fromRGB(25,25,40) }, 0.1) end)
+
+    -- Close
+    local closeBtn = create("TextButton", {
+        Text      = "✕",
+        Size      = UDim2.new(0, 20, 0, 20),
+        Position  = UDim2.new(1, -24, 0.5, -10),
+        BackgroundColor3 = Color3.fromRGB(25, 25, 40),
+        TextColor3 = Color3.fromRGB(80, 80, 100),
+        Font      = Enum.Font.Gotham,
+        TextSize  = 10,
+        BorderSizePixel = 0,
+    }, { makeCorner(4) })
     closeBtn.Parent = titleBar
     closeBtn.MouseEnter:Connect(function()
         tween(closeBtn, { BackgroundColor3 = Color3.fromHex("c0392b"), TextColor3 = Color3.fromRGB(255,255,255) }, 0.12)
     end)
     closeBtn.MouseLeave:Connect(function()
-        tween(closeBtn, { BackgroundColor3 = Color3.fromRGB(30,30,46), TextColor3 = Color3.fromRGB(80,80,100) }, 0.12)
+        tween(closeBtn, { BackgroundColor3 = Color3.fromRGB(25,25,40), TextColor3 = Color3.fromRGB(80,80,100) }, 0.12)
     end)
     closeBtn.MouseButton1Click:Connect(function()
-        tween(main, { Size = UDim2.new(0, 640, 0, 0) }, 0.22, Enum.EasingStyle.Quad)
+        tween(main, { Size = UDim2.new(0, 650, 0, 0) }, 0.22, Enum.EasingStyle.Quad)
         task.delay(0.25, function() screenGui:Destroy() end)
     end)
 
     makeDraggable(main, titleBar)
 
     -- ── Sidebar ──
+    -- Matches reference: 140px wide, dark bar color
     local sidebar = create("Frame", {
-        Name            = "Sidebar",
-        Size            = UDim2.new(0, 130, 1, -36),
-        Position        = UDim2.new(0, 0, 0, 36),
-        BackgroundColor3 = self.theme.bar,
-        BorderSizePixel = 0,
+        Name             = "Sidebar",
+        Size             = UDim2.new(0, 140, 1, -38),
+        Position         = UDim2.new(0, 0, 0, 38),
+        BackgroundColor3 = self.theme.sidebar,
+        BorderSizePixel  = 0,
     })
     sidebar.Parent = main
-    self._sidebar  = sidebar
-    self._tabList  = create("Frame", {
-        Size = UDim2.new(1, 0, 1, -40),
+    self._sidebar = sidebar
+
+    -- Right border on sidebar
+    create("Frame", {
+        Size             = UDim2.new(0, 1, 1, 0),
+        Position         = UDim2.new(1, -1, 0, 0),
+        BackgroundColor3 = self.theme.accent,
+        BackgroundTransparency = 0.88,
+        BorderSizePixel  = 0,
+    }).Parent = sidebar
+
+    self._tabList = create("Frame", {
+        Size     = UDim2.new(1, 0, 1, -44),
         Position = UDim2.new(0, 0, 0, 0),
         BackgroundTransparency = 1,
     })
     self._tabList.Parent = sidebar
     create("UIListLayout", { SortOrder = Enum.SortOrder.LayoutOrder }).Parent = self._tabList
 
-    -- User tag
+    -- User tag at bottom of sidebar
     local userTag = create("Frame", {
-        Size     = UDim2.new(1, 0, 0, 38),
-        Position = UDim2.new(0, 0, 1, -38),
-        BackgroundTransparency = 1,
+        Size     = UDim2.new(1, 0, 0, 44),
+        Position = UDim2.new(0, 0, 1, -44),
+        BackgroundColor3 = self.theme.bar,
+        BackgroundTransparency = 0.4,
+        BorderSizePixel = 0,
     })
     userTag.Parent = sidebar
+
+    -- Top border on user tag
+    create("Frame", {
+        Size             = UDim2.new(1, 0, 0, 1),
+        BackgroundColor3 = Color3.fromRGB(255,255,255),
+        BackgroundTransparency = 0.92,
+        BorderSizePixel  = 0,
+    }).Parent = userTag
+
+    -- Avatar circle
+    local avatarCircle = create("Frame", {
+        Size     = UDim2.new(0, 26, 0, 26),
+        Position = UDim2.new(0, 10, 0.5, -13),
+        BackgroundColor3 = self.theme.accent,
+        BackgroundTransparency = 0.6,
+        BorderSizePixel = 0,
+    }, { makeCorner(99) })
+    avatarCircle.Parent = userTag
+
     create("TextLabel", {
-        Text      = "👤  " .. LocalPlayer.Name,
-        Size      = UDim2.new(1, -10, 1, 0),
-        Position  = UDim2.new(0, 6, 0, 0),
+        Text      = "👤",
+        Size      = UDim2.new(1, 0, 1, 0),
         BackgroundTransparency = 1,
-        TextColor3 = Color3.fromRGB(80, 80, 100),
+        TextColor3 = Color3.fromRGB(255,255,255),
+        TextTransparency = 0.2,
+        Font      = Enum.Font.Gotham,
+        TextSize  = 13,
+    }).Parent = avatarCircle
+
+    -- Masked username
+    local rawName = LocalPlayer.Name
+    local maskedName = string.rep("*", math.min(5, #rawName)) .. rawName:sub(math.min(5,#rawName)+1)
+    create("TextLabel", {
+        Text      = maskedName,
+        Size      = UDim2.new(1, -46, 1, 0),
+        Position  = UDim2.new(0, 42, 0, 0),
+        BackgroundTransparency = 1,
+        TextColor3 = Color3.fromRGB(90, 90, 115),
         TextXAlignment = Enum.TextXAlignment.Left,
         Font      = Enum.Font.Gotham,
         TextSize  = 11,
@@ -243,14 +319,14 @@ function NapoleonGUI.new(options)
 
     -- ── Content Area ──
     local content = create("Frame", {
-        Name            = "ContentArea",
-        Size            = UDim2.new(1, -130, 1, -36),
-        Position        = UDim2.new(0, 130, 0, 36),
+        Name             = "ContentArea",
+        Size             = UDim2.new(1, -140, 1, -62),
+        Position         = UDim2.new(0, 140, 0, 38),
         BackgroundTransparency = 1,
         ClipsDescendants = true,
     })
     content.Parent = main
-    self._content  = content
+    self._content = content
 
     -- ── Watermark "N" ──
     local bigN = create("TextLabel", {
@@ -258,9 +334,9 @@ function NapoleonGUI.new(options)
         Size      = UDim2.new(1, 0, 1, 0),
         BackgroundTransparency = 1,
         TextColor3 = self.theme.accent,
-        TextTransparency = 0.945,
+        TextTransparency = 0.95,
         Font      = Enum.Font.GothamBlack,
-        TextSize  = 280,
+        TextSize  = 260,
         ZIndex    = 0,
         TextXAlignment = Enum.TextXAlignment.Right,
         TextYAlignment = Enum.TextYAlignment.Center,
@@ -270,27 +346,26 @@ function NapoleonGUI.new(options)
 
     -- ── Anime Girl ──
     local animeContainer = create("Frame", {
-        Name            = "AnimeGirl",
-        Size            = UDim2.new(0.8, 0, 1.6, 0),
-        Position        = UDim2.new(0.2, 0, -0.3, 0),
+        Name                   = "AnimeGirl",
+        Size                   = UDim2.new(0.78, 0, 1.55, 0),
+        Position               = UDim2.new(0.22, 0, -0.28, 0),
         BackgroundTransparency = 1,
-        ZIndex          = 0,
+        ZIndex                 = 0,
     })
     animeContainer.Parent = content
 
-    -- Gradient overlays (blend with body color)
     local gradLeft = create("Frame", {
-        Size     = UDim2.new(1, 0, 1, 0),
+        Size             = UDim2.new(1, 0, 1, 0),
         BackgroundColor3 = self.theme.body,
-        ZIndex   = 1,
+        ZIndex           = 1,
     })
     create("UIGradient", {
         Transparency = NumberSequence.new({
             NumberSequenceKeypoint.new(0, 0),
-            NumberSequenceKeypoint.new(0.15, 0.18),
-            NumberSequenceKeypoint.new(0.38, 0.65),
-            NumberSequenceKeypoint.new(0.6, 0.92),
-            NumberSequenceKeypoint.new(0.8, 1),
+            NumberSequenceKeypoint.new(0.12, 0.22),
+            NumberSequenceKeypoint.new(0.35, 0.68),
+            NumberSequenceKeypoint.new(0.58, 0.94),
+            NumberSequenceKeypoint.new(0.75, 1),
             NumberSequenceKeypoint.new(1, 1),
         }),
         Rotation = 0,
@@ -298,15 +373,15 @@ function NapoleonGUI.new(options)
     gradLeft.Parent = animeContainer
 
     local gradBottom = create("Frame", {
-        Size     = UDim2.new(1, 0, 1, 0),
+        Size             = UDim2.new(1, 0, 1, 0),
         BackgroundColor3 = self.theme.body,
-        ZIndex   = 1,
+        ZIndex           = 1,
     })
     create("UIGradient", {
         Transparency = NumberSequence.new({
             NumberSequenceKeypoint.new(0, 0),
-            NumberSequenceKeypoint.new(0.05, 0.45),
-            NumberSequenceKeypoint.new(0.2, 1),
+            NumberSequenceKeypoint.new(0.04, 0.5),
+            NumberSequenceKeypoint.new(0.18, 1),
             NumberSequenceKeypoint.new(1, 1),
         }),
         Rotation = 90,
@@ -314,58 +389,67 @@ function NapoleonGUI.new(options)
     gradBottom.Parent = animeContainer
 
     local gradTop = create("Frame", {
-        Size     = UDim2.new(1, 0, 1, 0),
+        Size             = UDim2.new(1, 0, 1, 0),
         BackgroundColor3 = self.theme.body,
-        ZIndex   = 1,
+        ZIndex           = 1,
     })
     create("UIGradient", {
         Transparency = NumberSequence.new({
             NumberSequenceKeypoint.new(0, 0),
-            NumberSequenceKeypoint.new(0.1, 0.75),
-            NumberSequenceKeypoint.new(0.26, 1),
+            NumberSequenceKeypoint.new(0.08, 0.78),
+            NumberSequenceKeypoint.new(0.22, 1),
             NumberSequenceKeypoint.new(1, 1),
         }),
         Rotation = 270,
     }).Parent = gradTop
     gradTop.Parent = animeContainer
 
-    -- Anime image
     local animeImg = create("ImageLabel", {
-        Image    = "https://cdn.discordapp.com/attachments/1398827590805880894/1512964892674621501/98c0aa84e93321ecafb74fbd050aded1.jpg",
-        Size     = UDim2.new(0.95, 0, 1.25, 0),
-        Position = UDim2.new(0.05, 0, -0.01, 0),
+        Image                  = "https://cdn.discordapp.com/attachments/1398827590805880894/1512964892674621501/98c0aa84e93321ecafb74fbd050aded1.jpg",
+        Size                   = UDim2.new(0.95, 0, 1.22, 0),
+        Position               = UDim2.new(0.05, 0, -0.01, 0),
         BackgroundTransparency = 1,
-        ScaleType = Enum.ScaleType.Fit,
-        ImageTransparency = 0.1,
-        ZIndex   = 0,
+        ScaleType              = Enum.ScaleType.Fit,
+        ImageTransparency      = 0.08,
+        ZIndex                 = 0,
     })
     animeImg.Parent = animeContainer
-    self._animeImg = animeImg
+    self._animeImg       = animeImg
     self._animeContainer = animeContainer
-    self._gradLeft = gradLeft
-    self._gradBottom = gradBottom
-    self._gradTop = gradTop
+    self._gradLeft       = gradLeft
+    self._gradBottom     = gradBottom
+    self._gradTop        = gradTop
 
     -- ── Status Bar ──
     local statusBar = create("Frame", {
-        Name     = "StatusBar",
-        Size     = UDim2.new(1, 0, 0, 24),
-        Position = UDim2.new(0, 0, 1, -24),
+        Name             = "StatusBar",
+        Size             = UDim2.new(1, 0, 0, 24),
+        Position         = UDim2.new(0, 0, 1, -24),
         BackgroundColor3 = self.theme.bar,
-        BorderSizePixel = 0,
-        ZIndex   = 5,
+        BorderSizePixel  = 0,
+        ZIndex           = 5,
     })
     statusBar.Parent = main
-    makeStroke(Color3.fromRGB(255,255,255), 1, 0.94).Parent = statusBar
 
-    -- Status: Script
-    local scriptDot = create("Frame", {
-        Size     = UDim2.new(0, 7, 0, 7),
-        Position = UDim2.new(0, 12, 0.5, -3),
-        BackgroundColor3 = Color3.fromHex("44ff88"),
-        BorderSizePixel = 0,
-    }, { makeCorner(99) })
-    scriptDot.Parent = statusBar
+    create("Frame", {
+        Size             = UDim2.new(1, 0, 0, 1),
+        BackgroundColor3 = Color3.fromRGB(255,255,255),
+        BackgroundTransparency = 0.94,
+        BorderSizePixel  = 0,
+    }).Parent = statusBar
+
+    local function makeStatusDot(xPos, dotColor)
+        local dot = create("Frame", {
+            Size             = UDim2.new(0, 7, 0, 7),
+            Position         = UDim2.new(0, xPos, 0.5, -3),
+            BackgroundColor3 = dotColor,
+            BorderSizePixel  = 0,
+        }, { makeCorner(99) })
+        dot.Parent = statusBar
+        return dot
+    end
+
+    makeStatusDot(12, Color3.fromHex("44ff88"))
     create("TextLabel", {
         Text     = "SCRIPT ACTIVE",
         Size     = UDim2.new(0, 100, 1, 0),
@@ -377,27 +461,19 @@ function NapoleonGUI.new(options)
         TextSize = 9,
     }).Parent = statusBar
 
-    -- Divider
     create("Frame", {
-        Size     = UDim2.new(0, 1, 0, 12),
-        Position = UDim2.new(0, 130, 0.5, -6),
+        Size             = UDim2.new(0, 1, 0, 12),
+        Position         = UDim2.new(0, 128, 0.5, -6),
         BackgroundColor3 = Color3.fromRGB(255,255,255),
         BackgroundTransparency = 0.9,
-        BorderSizePixel = 0,
+        BorderSizePixel  = 0,
     }).Parent = statusBar
 
-    -- Status: Executor
-    local execDot = create("Frame", {
-        Size     = UDim2.new(0, 7, 0, 7),
-        Position = UDim2.new(0, 140, 0.5, -3),
-        BackgroundColor3 = Color3.fromHex("44aaff"),
-        BorderSizePixel = 0,
-    }, { makeCorner(99) })
-    execDot.Parent = statusBar
+    makeStatusDot(138, Color3.fromHex("44aaff"))
     create("TextLabel", {
         Text     = "EXECUTOR READY",
         Size     = UDim2.new(0, 110, 1, 0),
-        Position = UDim2.new(0, 150, 0, 0),
+        Position = UDim2.new(0, 148, 0, 0),
         BackgroundTransparency = 1,
         TextColor3 = Color3.fromHex("5599dd"),
         TextXAlignment = Enum.TextXAlignment.Left,
@@ -405,11 +481,10 @@ function NapoleonGUI.new(options)
         TextSize = 9,
     }).Parent = statusBar
 
-    -- Discord link (right)
     create("TextLabel", {
         Text     = "napoleon.sc",
         Size     = UDim2.new(0, 90, 1, 0),
-        Position = UDim2.new(1, -98, 0, 0),
+        Position = UDim2.new(1, -96, 0, 0),
         BackgroundTransparency = 1,
         TextColor3 = Color3.fromHex("5865f2"),
         TextXAlignment = Enum.TextXAlignment.Right,
@@ -418,8 +493,8 @@ function NapoleonGUI.new(options)
     }).Parent = statusBar
 
     -- Open animation
-    main.Size = UDim2.new(0, 640, 0, 0)
-    tween(main, { Size = UDim2.new(0, 640, 0, 420) }, 0.28, Enum.EasingStyle.Back, Enum.EasingDirection.Out)
+    main.Size = UDim2.new(0, 650, 0, 0)
+    tween(main, { Size = UDim2.new(0, 650, 0, 440) }, 0.3, Enum.EasingStyle.Back, Enum.EasingDirection.Out)
 
     return self
 end
@@ -431,71 +506,55 @@ function NapoleonGUI:AddTab(name)
     local theme    = self.theme
     local tabIndex = #self._tabs + 1
 
-    -- Sidebar button
     local btn = create("TextButton", {
-        Text            = "",
-        Size            = UDim2.new(1, 0, 0, 38),
+        Text                   = "",
+        Size                   = UDim2.new(1, 0, 0, 40),
         BackgroundTransparency = 1,
-        BorderSizePixel = 0,
-        LayoutOrder     = tabIndex,
+        BorderSizePixel        = 0,
+        LayoutOrder            = tabIndex,
     })
     btn.Parent = self._tabList
 
+    -- Active indicator bar on left
     local indicator = create("Frame", {
-        Size     = UDim2.new(0, 2.5, 0.7, 0),
-        Position = UDim2.new(0, 0, 0.15, 0),
+        Size             = UDim2.new(0, 3, 0.65, 0),
+        Position         = UDim2.new(0, 0, 0.175, 0),
         BackgroundColor3 = theme.accent,
         BackgroundTransparency = 1,
-        BorderSizePixel = 0,
+        BorderSizePixel  = 0,
     }, { makeCorner(2) })
     indicator.Parent = btn
 
-    local dot = create("Frame", {
-        Size     = UDim2.new(0, 4, 0, 4),
-        Position = UDim2.new(0, 14, 0.5, -2),
-        BackgroundColor3 = theme.accent,
-        BackgroundTransparency = 1,
-        BorderSizePixel = 0,
-    }, { makeCorner(99) })
-    dot.Parent = btn
-
     local label = create("TextLabel", {
         Text      = name,
-        Size      = UDim2.new(1, -26, 1, 0),
-        Position  = UDim2.new(0, 24, 0, 0),
+        Size      = UDim2.new(1, -18, 1, 0),
+        Position  = UDim2.new(0, 18, 0, 0),
         BackgroundTransparency = 1,
-        TextColor3 = Color3.fromRGB(85, 85, 106),
+        TextColor3 = Color3.fromRGB(75, 75, 100),
         TextXAlignment = Enum.TextXAlignment.Left,
         Font      = Enum.Font.Gotham,
         TextSize  = 13,
     })
     label.Parent = btn
 
-    -- Content page
     local page = create("ScrollingFrame", {
-        Name            = "Page_" .. name,
-        Size            = UDim2.new(1, 0, 1, 0),
-        Position        = UDim2.new(0, 0, 0, 0),
+        Name                   = "Page_" .. name,
+        Size                   = UDim2.new(1, 0, 1, 0),
         BackgroundTransparency = 1,
-        BorderSizePixel = 0,
-        ScrollBarThickness = 3,
-        ScrollBarImageColor3 = theme.accent,
-        CanvasSize      = UDim2.new(0, 0, 0, 0),
-        AutomaticCanvasSize = Enum.AutomaticSize.Y,
-        Visible         = false,
+        BorderSizePixel        = 0,
+        ScrollBarThickness     = 3,
+        ScrollBarImageColor3   = theme.accent,
+        CanvasSize             = UDim2.new(0, 0, 0, 0),
+        AutomaticCanvasSize    = Enum.AutomaticSize.Y,
+        Visible                = false,
     })
     page.Parent = self._content
-
-    create("UIListLayout", {
-        SortOrder = Enum.SortOrder.LayoutOrder,
-        Padding   = UDim.new(0, 0),
-    }).Parent = page
+    create("UIListLayout", { SortOrder = Enum.SortOrder.LayoutOrder, Padding = UDim.new(0,0) }).Parent = page
 
     local tab = {
         name      = name,
         btn       = btn,
         indicator = indicator,
-        dot       = dot,
         label     = label,
         page      = page,
         _sections = {},
@@ -506,46 +565,37 @@ function NapoleonGUI:AddTab(name)
 
     table.insert(self._tabs, tab)
 
-    -- Hover
     btn.MouseEnter:Connect(function()
         if self._activeTab ~= tab then
-            tween(label, { TextColor3 = Color3.fromRGB(180, 180, 200) }, 0.12)
+            tween(label, { TextColor3 = Color3.fromRGB(160, 160, 190) }, 0.12)
         end
     end)
     btn.MouseLeave:Connect(function()
         if self._activeTab ~= tab then
-            tween(label, { TextColor3 = Color3.fromRGB(85, 85, 106) }, 0.12)
+            tween(label, { TextColor3 = Color3.fromRGB(75, 75, 100) }, 0.12)
         end
     end)
+    btn.MouseButton1Click:Connect(function() self:_selectTab(tab) end)
 
-    btn.MouseButton1Click:Connect(function()
-        self:_selectTab(tab)
-    end)
-
-    if tabIndex == 1 then
-        self:_selectTab(tab)
-    end
+    if tabIndex == 1 then self:_selectTab(tab) end
 
     return tab
 end
 
 function NapoleonGUI:_selectTab(tab)
-    -- Deactivate old
     if self._activeTab then
         local old = self._activeTab
         tween(old.indicator, { BackgroundTransparency = 1 }, 0.15)
-        tween(old.dot,       { BackgroundTransparency = 1 }, 0.15)
-        tween(old.label,     { TextColor3 = Color3.fromRGB(85,85,106) }, 0.15)
+        tween(old.label, { TextColor3 = Color3.fromRGB(75,75,100), Font = Enum.Font.Gotham }, 0.15)
         old.btn.BackgroundTransparency = 1
         old.page.Visible = false
     end
     self._activeTab = tab
-    -- Activate
     tween(tab.indicator, { BackgroundTransparency = 0 }, 0.15)
-    tween(tab.dot,       { BackgroundTransparency = 0 }, 0.15)
-    tween(tab.label, { TextColor3 = Color3.fromRGB(255,255,255) }, 0.15)
-    tab.btn.BackgroundColor3 = Color3.fromRGB(0,0,0)
-    tab.btn.BackgroundTransparency = 0.93
+    tween(tab.label, { TextColor3 = self.theme.accent }, 0.15)
+    tab.label.Font = Enum.Font.GothamBold
+    tab.btn.BackgroundColor3 = self.theme.accent
+    tab.btn.BackgroundTransparency = 0.9
     tab.page.Visible = true
 end
 
@@ -553,53 +603,55 @@ end
 --  SECTION
 -- ══════════════════════════════════════════════════════════════
 function NapoleonGUI:AddSection(tab, name)
-    local theme   = self.theme
-    local page    = tab.page
-    local order   = #tab._sections + 1
+    local theme     = self.theme
+    local page      = tab.page
+    local order     = #tab._sections + 1
     local collapsed = false
 
-    -- Section wrapper
     local wrapper = create("Frame", {
-        Name            = "Section_" .. name,
-        Size            = UDim2.new(1, 0, 0, 0),
-        AutomaticSize   = Enum.AutomaticSize.Y,
+        Name              = "Section_" .. name,
+        Size              = UDim2.new(1, 0, 0, 0),
+        AutomaticSize     = Enum.AutomaticSize.Y,
         BackgroundTransparency = 1,
-        LayoutOrder     = order,
+        LayoutOrder       = order,
     })
     wrapper.Parent = page
     create("UIListLayout", { SortOrder = Enum.SortOrder.LayoutOrder }).Parent = wrapper
 
-    -- Header
+    -- Section header: slightly lighter than body, accent left bar + accent text
     local header = create("TextButton", {
-        Text            = "",
-        Size            = UDim2.new(1, 0, 0, 32),
-        BackgroundColor3 = theme.accent,
-        BackgroundTransparency = 0.9,
-        BorderSizePixel = 0,
-        LayoutOrder     = 0,
+        Text             = "",
+        Size             = UDim2.new(1, 0, 0, 34),
+        BackgroundColor3 = theme.sectionBg,
+        BackgroundTransparency = 0,
+        BorderSizePixel  = 0,
+        LayoutOrder      = 0,
     })
     header.Parent = wrapper
+
+    -- Left color bar
     create("Frame", {
-        Size     = UDim2.new(0, 2, 1, 0),
+        Size             = UDim2.new(0, 3, 1, 0),
         BackgroundColor3 = theme.accent,
-        BorderSizePixel = 0,
+        BorderSizePixel  = 0,
     }).Parent = header
 
+    -- Section title text
     create("TextLabel", {
-        Text      = name:upper(),
-        Size      = UDim2.new(1, -20, 1, 0),
-        Position  = UDim2.new(0, 10, 0, 0),
+        Text      = name,
+        Size      = UDim2.new(1, -36, 1, 0),
+        Position  = UDim2.new(0, 14, 0, 0),
         BackgroundTransparency = 1,
         TextColor3 = theme.accent,
         TextXAlignment = Enum.TextXAlignment.Left,
         Font      = Enum.Font.GothamBold,
-        TextSize  = 11,
+        TextSize  = 12,
     }).Parent = header
 
     local chevron = create("TextLabel", {
-        Text      = "▾",
-        Size      = UDim2.new(0, 16, 1, 0),
-        Position  = UDim2.new(1, -18, 0, 0),
+        Text      = "∨",
+        Size      = UDim2.new(0, 18, 1, 0),
+        Position  = UDim2.new(1, -22, 0, 0),
         BackgroundTransparency = 1,
         TextColor3 = theme.accent,
         Font      = Enum.Font.GothamBold,
@@ -607,66 +659,56 @@ function NapoleonGUI:AddSection(tab, name)
     })
     chevron.Parent = header
 
-    -- Body
     local body = create("Frame", {
-        Name            = "SectionBody",
-        Size            = UDim2.new(1, 0, 0, 0),
-        AutomaticSize   = Enum.AutomaticSize.Y,
+        Name              = "SectionBody",
+        Size              = UDim2.new(1, 0, 0, 0),
+        AutomaticSize     = Enum.AutomaticSize.Y,
         BackgroundTransparency = 1,
-        LayoutOrder     = 1,
+        LayoutOrder       = 1,
     })
     body.Parent = wrapper
     create("UIListLayout", { SortOrder = Enum.SortOrder.LayoutOrder }).Parent = body
 
-    -- Separator
-    create("Frame", {
-        Size     = UDim2.new(1, 0, 0, 1),
-        BackgroundColor3 = Color3.fromRGB(255,255,255),
-        BackgroundTransparency = 0.96,
-        BorderSizePixel = 0,
-        LayoutOrder = 999,
-    }).Parent = body
-
     header.MouseButton1Click:Connect(function()
         collapsed = not collapsed
         body.Visible = not collapsed
-        chevron.Text = collapsed and "▸" or "▾"
+        chevron.Text = collapsed and ">" or "∨"
     end)
 
     local section = {
-        wrapper  = wrapper,
-        body     = body,
-        _order   = 0,
-        _gui     = self,
-        _tab     = tab,
+        wrapper = wrapper,
+        body    = body,
+        _order  = 0,
+        _gui    = self,
+        _tab    = tab,
     }
     table.insert(tab._sections, section)
     return section
 end
 
 -- ══════════════════════════════════════════════════════════════
---  ELEMENTS (added to sections)
+--  ELEMENTS
 -- ══════════════════════════════════════════════════════════════
 
--- Helper: row frame
 local function makeRow(section, h)
-    h = h or 36
+    h = h or 38
     local theme = section._gui.theme
     section._order = section._order + 1
     local row = create("Frame", {
         Size            = UDim2.new(1, 0, 0, h),
-        BackgroundTransparency = 1,
+        BackgroundColor3 = theme.rowBg,
+        BackgroundTransparency = 0,
         BorderSizePixel = 0,
         LayoutOrder     = section._order,
     })
     row.Parent = section.body
-    -- bottom border
+    -- bottom separator
     create("Frame", {
-        Size     = UDim2.new(1, 0, 0, 1),
-        Position = UDim2.new(0, 0, 1, -1),
+        Size             = UDim2.new(1, 0, 0, 1),
+        Position         = UDim2.new(0, 0, 1, -1),
         BackgroundColor3 = Color3.fromRGB(255,255,255),
         BackgroundTransparency = 0.95,
-        BorderSizePixel = 0,
+        BorderSizePixel  = 0,
     }).Parent = row
     return row, theme
 end
@@ -674,9 +716,9 @@ end
 -- TOGGLE
 function NapoleonGUI:AddToggle(section, opts)
     opts = opts or {}
-    local flag    = opts.Flag    or opts.Name or "toggle_" .. math.random(9999)
-    local default = opts.Default ~= nil and opts.Default or false
-    local callback= opts.Callback or function() end
+    local flag     = opts.Flag    or opts.Name or "toggle_" .. math.random(9999)
+    local default  = opts.Default ~= nil and opts.Default or false
+    local callback = opts.Callback or function() end
 
     self._flags[flag] = default
 
@@ -684,10 +726,10 @@ function NapoleonGUI:AddToggle(section, opts)
 
     create("TextLabel", {
         Text      = opts.Name or "Toggle",
-        Size      = UDim2.new(0.7, 0, 1, 0),
-        Position  = UDim2.new(0, 14, 0, 0),
+        Size      = UDim2.new(0.72, 0, 1, 0),
+        Position  = UDim2.new(0, 16, 0, 0),
         BackgroundTransparency = 1,
-        TextColor3 = Color3.fromRGB(208, 208, 232),
+        TextColor3 = Color3.fromRGB(200, 200, 220),
         TextXAlignment = Enum.TextXAlignment.Left,
         Font      = Enum.Font.Gotham,
         TextSize  = 12,
@@ -695,18 +737,18 @@ function NapoleonGUI:AddToggle(section, opts)
 
     local track = create("TextButton", {
         Text     = "",
-        Size     = UDim2.new(0, 42, 0, 22),
-        Position = UDim2.new(1, -54, 0.5, -11),
-        BackgroundColor3 = default and theme.accent or Color3.fromRGB(30,30,48),
-        BorderSizePixel = 0,
-    }, { makeCorner(11) })
+        Size     = UDim2.new(0, 40, 0, 20),
+        Position = UDim2.new(1, -52, 0.5, -10),
+        BackgroundColor3 = default and theme.accent or Color3.fromRGB(28, 28, 46),
+        BorderSizePixel  = 0,
+    }, { makeCorner(10) })
     track.Parent = row
 
     local knob = create("Frame", {
         Size     = UDim2.new(0, 14, 0, 14),
-        Position = default and UDim2.new(0, 25, 0.5, -7) or UDim2.new(0, 4, 0.5, -7),
-        BackgroundColor3 = default and Color3.fromRGB(255,255,255) or Color3.fromRGB(80,80,80),
-        BorderSizePixel = 0,
+        Position = default and UDim2.new(0, 23, 0.5, -7) or UDim2.new(0, 3, 0.5, -7),
+        BackgroundColor3 = default and Color3.fromRGB(255,255,255) or Color3.fromRGB(70,70,90),
+        BorderSizePixel  = 0,
     }, { makeCorner(99) })
     knob.Parent = track
 
@@ -714,20 +756,19 @@ function NapoleonGUI:AddToggle(section, opts)
     track.MouseButton1Click:Connect(function()
         state = not state
         self._flags[flag] = state
-        tween(track, { BackgroundColor3 = state and theme.accent or Color3.fromRGB(30,30,48) }, 0.2)
-        tween(knob,  {
-            Position   = state and UDim2.new(0,25,0.5,-7) or UDim2.new(0,4,0.5,-7),
-            BackgroundColor3 = state and Color3.fromRGB(255,255,255) or Color3.fromRGB(80,80,80),
+        tween(track, { BackgroundColor3 = state and theme.accent or Color3.fromRGB(28,28,46) }, 0.2)
+        tween(knob, {
+            Position         = state and UDim2.new(0,23,0.5,-7) or UDim2.new(0,3,0.5,-7),
+            BackgroundColor3 = state and Color3.fromRGB(255,255,255) or Color3.fromRGB(70,70,90),
         }, 0.2, Enum.EasingStyle.Back)
         pcall(callback, state)
     end)
 
     return {
         Set = function(v)
-            state = v
-            self._flags[flag] = v
-            tween(track, { BackgroundColor3 = v and theme.accent or Color3.fromRGB(30,30,48) }, 0.15)
-            tween(knob,  { Position = v and UDim2.new(0,25,0.5,-7) or UDim2.new(0,4,0.5,-7) }, 0.15)
+            state = v; self._flags[flag] = v
+            tween(track, { BackgroundColor3 = v and theme.accent or Color3.fromRGB(28,28,46) }, 0.15)
+            tween(knob, { Position = v and UDim2.new(0,23,0.5,-7) or UDim2.new(0,3,0.5,-7) }, 0.15)
             pcall(callback, v)
         end,
         Get = function() return state end,
@@ -737,25 +778,24 @@ end
 -- SLIDER
 function NapoleonGUI:AddSlider(section, opts)
     opts = opts or {}
-    local flag     = opts.Flag or opts.Name or "slider_" .. math.random(9999)
-    local min      = opts.Min      or 0
-    local max      = opts.Max      or 100
-    local default  = opts.Default  or min
-    local suffix   = opts.Suffix   or ""
+    local flag     = opts.Flag    or opts.Name or "slider_" .. math.random(9999)
+    local min      = opts.Min     or 0
+    local max      = opts.Max     or 100
+    local default  = opts.Default or min
+    local suffix   = opts.Suffix  or ""
     local callback = opts.Callback or function() end
 
     self._flags[flag] = default
 
-    local row, theme = makeRow(section, 50)
+    local row, theme = makeRow(section, 52)
     local val = default
 
-    -- Label row
     create("TextLabel", {
         Text     = opts.Name or "Slider",
-        Size     = UDim2.new(0.6, 0, 0, 20),
-        Position = UDim2.new(0, 14, 0, 6),
+        Size     = UDim2.new(0.6, 0, 0, 22),
+        Position = UDim2.new(0, 16, 0, 7),
         BackgroundTransparency = 1,
-        TextColor3 = Color3.fromRGB(208,208,232),
+        TextColor3 = Color3.fromRGB(200,200,220),
         TextXAlignment = Enum.TextXAlignment.Left,
         Font     = Enum.Font.Gotham,
         TextSize = 12,
@@ -763,8 +803,8 @@ function NapoleonGUI:AddSlider(section, opts)
 
     local valLabel = create("TextLabel", {
         Text     = tostring(default) .. suffix,
-        Size     = UDim2.new(0.4, -14, 0, 20),
-        Position = UDim2.new(0.6, 0, 0, 6),
+        Size     = UDim2.new(0.4, -16, 0, 22),
+        Position = UDim2.new(0.6, 0, 0, 7),
         BackgroundTransparency = 1,
         TextColor3 = theme.accent,
         TextXAlignment = Enum.TextXAlignment.Right,
@@ -773,19 +813,18 @@ function NapoleonGUI:AddSlider(section, opts)
     })
     valLabel.Parent = row
 
-    -- Track
     local track = create("Frame", {
-        Size     = UDim2.new(1, -28, 0, 4),
-        Position = UDim2.new(0, 14, 0, 34),
-        BackgroundColor3 = Color3.fromRGB(30,30,50),
-        BorderSizePixel = 0,
+        Size     = UDim2.new(1, -32, 0, 4),
+        Position = UDim2.new(0, 16, 0, 36),
+        BackgroundColor3 = Color3.fromRGB(25, 25, 45),
+        BorderSizePixel  = 0,
     }, { makeCorner(2) })
     track.Parent = row
 
     local fill = create("Frame", {
-        Size     = UDim2.new((default-min)/(max-min), 0, 1, 0),
+        Size             = UDim2.new((default-min)/(max-min), 0, 1, 0),
         BackgroundColor3 = theme.accent,
-        BorderSizePixel = 0,
+        BorderSizePixel  = 0,
     }, { makeCorner(2) })
     fill.Parent = track
 
@@ -793,29 +832,23 @@ function NapoleonGUI:AddSlider(section, opts)
         Size     = UDim2.new(0, 10, 0, 10),
         Position = UDim2.new((default-min)/(max-min), -5, 0.5, -5),
         BackgroundColor3 = Color3.fromRGB(255,255,255),
-        BorderSizePixel = 0,
+        BorderSizePixel  = 0,
     }, { makeCorner(99) })
     handle.Parent = track
 
     local sliding = false
     track.InputBegan:Connect(function(inp)
-        if inp.UserInputType == Enum.UserInputType.MouseButton1 then
-            sliding = true
-        end
+        if inp.UserInputType == Enum.UserInputType.MouseButton1 then sliding = true end
     end)
     track.InputEnded:Connect(function(inp)
-        if inp.UserInputType == Enum.UserInputType.MouseButton1 then
-            sliding = false
-        end
+        if inp.UserInputType == Enum.UserInputType.MouseButton1 then sliding = false end
     end)
     UserInputService.InputChanged:Connect(function(inp)
         if sliding and inp.UserInputType == Enum.UserInputType.MouseMovement then
-            local absPos  = track.AbsolutePosition.X
-            local absSize = track.AbsoluteSize.X
-            local pct     = math.clamp((inp.Position.X - absPos) / absSize, 0, 1)
-            val           = math.floor(min + (max - min) * pct)
+            local pct = math.clamp((inp.Position.X - track.AbsolutePosition.X) / track.AbsoluteSize.X, 0, 1)
+            val = math.floor(min + (max - min) * pct)
             self._flags[flag] = val
-            fill.Size   = UDim2.new(pct, 0, 1, 0)
+            fill.Size = UDim2.new(pct, 0, 1, 0)
             handle.Position = UDim2.new(pct, -5, 0.5, -5)
             valLabel.Text = tostring(val) .. suffix
             pcall(callback, val)
@@ -824,53 +857,152 @@ function NapoleonGUI:AddSlider(section, opts)
 
     return {
         Set = function(v)
-            v   = math.clamp(v, min, max)
-            val = v
-            self._flags[flag] = v
+            v = math.clamp(v, min, max); val = v; self._flags[flag] = v
             local pct = (v-min)/(max-min)
-            fill.Size   = UDim2.new(pct, 0, 1, 0)
-            handle.Position = UDim2.new(pct, -5, 0.5, -5)
-            valLabel.Text = tostring(v) .. suffix
-            pcall(callback, v)
+            fill.Size = UDim2.new(pct,0,1,0); handle.Position = UDim2.new(pct,-5,0.5,-5)
+            valLabel.Text = tostring(v) .. suffix; pcall(callback, v)
         end,
         Get = function() return val end,
     }
 end
 
--- BUTTON
+-- BUTTON (full-width with icon cursor matching reference)
 function NapoleonGUI:AddButton(section, opts)
     opts = opts or {}
     local callback = opts.Callback or function() end
-    local row, theme = makeRow(section)
+    local row, theme = makeRow(section, 38)
+
+    -- Left mouse icon area (matches reference screenshot style)
+    local iconBox = create("Frame", {
+        Size             = UDim2.new(0, 22, 0, 22),
+        Position         = UDim2.new(1, -32, 0.5, -11),
+        BackgroundColor3 = theme.accent,
+        BackgroundTransparency = 0.88,
+        BorderSizePixel  = 0,
+    }, { makeCorner(4) })
+    iconBox.Parent = row
+
+    create("TextLabel", {
+        Text      = "🖱",
+        Size      = UDim2.new(1, 0, 1, 0),
+        BackgroundTransparency = 1,
+        TextColor3 = theme.accent,
+        Font      = Enum.Font.Gotham,
+        TextSize  = 11,
+    }).Parent = iconBox
 
     local btn = create("TextButton", {
         Text     = opts.Name or "Button",
-        Size     = UDim2.new(1, -28, 0, 26),
-        Position = UDim2.new(0, 14, 0.5, -13),
-        BackgroundColor3 = theme.accent,
-        BackgroundTransparency = 0.35,
-        TextColor3 = Color3.fromRGB(255,255,255),
-        Font      = Enum.Font.GothamBold,
-        TextSize  = 12,
+        Size     = UDim2.new(1, 0, 1, -1),
+        Position = UDim2.new(0, 0, 0, 0),
+        BackgroundTransparency = 1,
+        TextColor3 = Color3.fromRGB(200,200,220),
+        Font      = Enum.Font.Gotham,
+        TextSize  = 13,
+        TextXAlignment = Enum.TextXAlignment.Left,
         BorderSizePixel = 0,
-    }, { makeCorner(5), makeStroke(theme.accent, 1, 0.55) })
+    })
     btn.Parent = row
 
+    -- Indent text
+    create("UIPadding", { PaddingLeft = UDim.new(0, 16) }).Parent = btn
+
     btn.MouseEnter:Connect(function()
-        tween(btn, { BackgroundTransparency = 0.1 }, 0.12)
+        tween(row, { BackgroundColor3 = theme.accent }, 0.12)
+        row.BackgroundTransparency = 0.92
     end)
     btn.MouseLeave:Connect(function()
-        tween(btn, { BackgroundTransparency = 0.35 }, 0.12)
+        tween(row, { BackgroundColor3 = section._gui.theme.rowBg }, 0.12)
+        row.BackgroundTransparency = 0
     end)
     btn.MouseButton1Click:Connect(function()
-        tween(btn, { BackgroundTransparency = 0 }, 0.08)
-        task.delay(0.15, function()
-            tween(btn, { BackgroundTransparency = 0.35 }, 0.12)
-        end)
+        row.BackgroundTransparency = 0.85
+        task.delay(0.15, function() row.BackgroundTransparency = 0 end)
         pcall(callback)
     end)
 
     return btn
+end
+
+-- DUAL BUTTON (two side-by-side buttons like Save/Load, Delete/Copy in reference)
+function NapoleonGUI:AddDualButton(section, opts1, opts2)
+    opts1 = opts1 or {}; opts2 = opts2 or {}
+    local theme = section._gui.theme
+    section._order = section._order + 1
+    local row = create("Frame", {
+        Size            = UDim2.new(1, 0, 0, 38),
+        BackgroundTransparency = 1,
+        BorderSizePixel = 0,
+        LayoutOrder     = section._order,
+    })
+    row.Parent = section.body
+
+    local function makeHalfBtn(name, xScale, callback)
+        local bg = create("Frame", {
+            Size             = UDim2.new(0.5, -1, 1, -1),
+            Position         = UDim2.new(xScale, xScale > 0 and 1 or 0, 0, 0),
+            BackgroundColor3 = theme.rowBg,
+            BorderSizePixel  = 0,
+        })
+        bg.Parent = row
+
+        local iconBox = create("Frame", {
+            Size             = UDim2.new(0, 20, 0, 20),
+            Position         = UDim2.new(1, -26, 0.5, -10),
+            BackgroundColor3 = theme.accent,
+            BackgroundTransparency = 0.88,
+            BorderSizePixel  = 0,
+        }, { makeCorner(4) })
+        iconBox.Parent = bg
+
+        create("TextLabel", {
+            Text      = "🖱",
+            Size      = UDim2.new(1, 0, 1, 0),
+            BackgroundTransparency = 1,
+            TextColor3 = theme.accent,
+            Font      = Enum.Font.Gotham,
+            TextSize  = 10,
+        }).Parent = iconBox
+
+        local btn = create("TextButton", {
+            Text     = name,
+            Size     = UDim2.new(1, 0, 1, 0),
+            BackgroundTransparency = 1,
+            TextColor3 = Color3.fromRGB(200,200,220),
+            Font      = Enum.Font.Gotham,
+            TextSize  = 12,
+            TextXAlignment = Enum.TextXAlignment.Left,
+            BorderSizePixel = 0,
+        })
+        btn.Parent = bg
+        create("UIPadding", { PaddingLeft = UDim.new(0, 14) }).Parent = btn
+
+        btn.MouseEnter:Connect(function() tween(bg, { BackgroundColor3 = theme.accent }, 0.12); bg.BackgroundTransparency = 0.9 end)
+        btn.MouseLeave:Connect(function() tween(bg, { BackgroundColor3 = theme.rowBg }, 0.12); bg.BackgroundTransparency = 0 end)
+        btn.MouseButton1Click:Connect(function() pcall(callback or function() end) end)
+        return btn
+    end
+
+    makeHalfBtn(opts1.Name or "Button 1", 0, opts1.Callback)
+    makeHalfBtn(opts2.Name or "Button 2", 0.5, opts2.Callback)
+
+    -- divider between halves
+    create("Frame", {
+        Size             = UDim2.new(0, 1, 1, 0),
+        Position         = UDim2.new(0.5, 0, 0, 0),
+        BackgroundColor3 = Color3.fromRGB(255,255,255),
+        BackgroundTransparency = 0.94,
+        BorderSizePixel  = 0,
+    }).Parent = row
+
+    -- bottom separator
+    create("Frame", {
+        Size             = UDim2.new(1, 0, 0, 1),
+        Position         = UDim2.new(0, 0, 1, -1),
+        BackgroundColor3 = Color3.fromRGB(255,255,255),
+        BackgroundTransparency = 0.95,
+        BorderSizePixel  = 0,
+    }).Parent = row
 end
 
 -- LABEL
@@ -881,9 +1013,9 @@ function NapoleonGUI:AddLabel(section, opts)
     local lbl = create("TextLabel", {
         Text      = opts.Text or "",
         Size      = UDim2.new(1, -28, 1, 0),
-        Position  = UDim2.new(0, 14, 0, 0),
+        Position  = UDim2.new(0, 16, 0, 0),
         BackgroundTransparency = 1,
-        TextColor3 = Color3.fromRGB(150, 150, 180),
+        TextColor3 = Color3.fromRGB(140, 140, 168),
         TextXAlignment = Enum.TextXAlignment.Left,
         Font      = Enum.Font.Gotham,
         TextSize  = 11,
@@ -897,96 +1029,180 @@ function NapoleonGUI:AddLabel(section, opts)
     }
 end
 
--- DROPDOWN
+-- DROPDOWN  (styled like reference: name on left, value button with ▾ on right)
 function NapoleonGUI:AddDropdown(section, opts)
     opts = opts or {}
     local flag     = opts.Flag    or opts.Name or "dd_" .. math.random(9999)
     local items    = opts.Items   or {}
     local default  = opts.Default or (items[1] or "")
     local callback = opts.Callback or function() end
+    local placeholder = opts.Placeholder or "Select the " .. (opts.Name or "option") .. " you want"
 
     self._flags[flag] = default
 
-    local row, theme = makeRow(section, 36)
-    local selected   = default
-    local open       = false
+    local row, theme = makeRow(section, 52)
+    local selected = default
+    local open     = false
 
+    -- Label + description rows
     create("TextLabel", {
         Text     = opts.Name or "Dropdown",
-        Size     = UDim2.new(0.5, 0, 1, 0),
-        Position = UDim2.new(0, 14, 0, 0),
+        Size     = UDim2.new(1, -48, 0, 20),
+        Position = UDim2.new(0, 16, 0, 5),
         BackgroundTransparency = 1,
-        TextColor3 = Color3.fromRGB(208,208,232),
+        TextColor3 = Color3.fromRGB(200,200,220),
         TextXAlignment = Enum.TextXAlignment.Left,
         Font     = Enum.Font.Gotham,
-        TextSize = 12,
+        TextSize = 13,
     }).Parent = row
 
-    local valBtn = create("TextButton", {
-        Text     = selected .. "  ▾",
-        Size     = UDim2.new(0, 130, 0, 24),
-        Position = UDim2.new(1, -144, 0.5, -12),
-        BackgroundColor3 = Color3.fromRGB(15,15,30),
-        TextColor3 = Color3.fromRGB(150,150,180),
+    create("TextLabel", {
+        Text     = placeholder,
+        Size     = UDim2.new(1, -48, 0, 16),
+        Position = UDim2.new(0, 16, 0, 26),
+        BackgroundTransparency = 1,
+        TextColor3 = Color3.fromRGB(75, 75, 100),
+        TextXAlignment = Enum.TextXAlignment.Left,
         Font     = Enum.Font.Gotham,
-        TextSize = 11,
+        TextSize = 10,
+    }).Parent = row
+
+    -- Right chevron button
+    local valBtn = create("TextButton", {
+        Text     = "∨",
+        Size     = UDim2.new(0, 28, 0, 28),
+        Position = UDim2.new(1, -38, 0.5, -14),
+        BackgroundColor3 = theme.accent,
+        BackgroundTransparency = 0.85,
+        TextColor3 = theme.accent,
+        Font     = Enum.Font.GothamBold,
+        TextSize = 14,
         BorderSizePixel = 0,
-    }, { makeCorner(4), makeStroke(theme.accent, 1, 0.72) })
+    }, { makeCorner(5) })
     valBtn.Parent = row
 
-    -- Dropdown list (rendered in page-level frame so it overlaps rows)
+    -- Current value indicator
+    local valLabel = create("TextLabel", {
+        Text     = selected ~= "" and selected or "",
+        Size     = UDim2.new(0, 100, 0, 20),
+        Position = UDim2.new(1, -148, 0.5, -10),
+        BackgroundTransparency = 1,
+        TextColor3 = theme.accent,
+        TextXAlignment = Enum.TextXAlignment.Right,
+        Font     = Enum.Font.GothamBold,
+        TextSize = 11,
+    })
+    valLabel.Parent = row
+
+    -- Dropdown panel (floating, matches reference style with search)
     local listFrame = create("Frame", {
-        Size     = UDim2.new(0, 130, 0, math.min(#items, 5) * 28),
-        Position = UDim2.new(1, -144, 0, 36),
-        BackgroundColor3 = Color3.fromRGB(10,10,22),
-        BorderSizePixel = 0,
+        Size     = UDim2.new(0, 155, 0, math.min(#items, 5) * 30 + 38),
+        Position = UDim2.new(1, -165, 0, 52),
+        BackgroundColor3 = Color3.fromRGB(12, 12, 22),
+        BorderSizePixel  = 0,
         ZIndex   = 20,
         Visible  = false,
-    }, { makeCorner(5), makeStroke(theme.accent, 1, 0.65) })
+    }, { makeCorner(7), makeStroke(theme.accent, 1, 0.6) })
     listFrame.Parent = row
 
-    create("UIListLayout", { SortOrder = Enum.SortOrder.LayoutOrder }).Parent = listFrame
+    -- Search box at top
+    local searchBox = create("TextBox", {
+        Text              = "",
+        PlaceholderText   = "Search",
+        Size              = UDim2.new(1, -12, 0, 28),
+        Position          = UDim2.new(0, 6, 0, 5),
+        BackgroundColor3  = Color3.fromRGB(18, 18, 32),
+        BackgroundTransparency = 0,
+        TextColor3        = Color3.fromRGB(200,200,220),
+        PlaceholderColor3 = Color3.fromRGB(70,70,90),
+        TextXAlignment    = Enum.TextXAlignment.Left,
+        Font              = Enum.Font.Gotham,
+        TextSize          = 11,
+        ClearTextOnFocus  = false,
+        BorderSizePixel   = 0,
+        ZIndex            = 21,
+    }, { makeCorner(5) })
+    searchBox.Parent = listFrame
+    create("UIPadding", { PaddingLeft = UDim.new(0, 8) }).Parent = searchBox
 
+    local itemsContainer = create("ScrollingFrame", {
+        Size              = UDim2.new(1, 0, 1, -38),
+        Position          = UDim2.new(0, 0, 0, 38),
+        BackgroundTransparency = 1,
+        BorderSizePixel   = 0,
+        ScrollBarThickness = 2,
+        ScrollBarImageColor3 = theme.accent,
+        CanvasSize        = UDim2.new(0,0,0,0),
+        AutomaticCanvasSize = Enum.AutomaticSize.Y,
+        ZIndex            = 21,
+    })
+    itemsContainer.Parent = listFrame
+    create("UIListLayout", { SortOrder = Enum.SortOrder.LayoutOrder }).Parent = itemsContainer
+
+    local itemBtns = {}
     for i, item in ipairs(items) do
         local itemBtn = create("TextButton", {
             Text     = item,
-            Size     = UDim2.new(1, 0, 0, 28),
+            Size     = UDim2.new(1, 0, 0, 30),
             BackgroundTransparency = 1,
-            TextColor3 = item == selected and theme.accent or Color3.fromRGB(140,140,165),
+            TextColor3 = item == selected and theme.accent or Color3.fromRGB(175,175,200),
+            TextXAlignment = Enum.TextXAlignment.Left,
             Font     = Enum.Font.Gotham,
             TextSize = 12,
             LayoutOrder = i,
             ZIndex   = 21,
             BorderSizePixel = 0,
         })
-        itemBtn.Parent = listFrame
-        itemBtn.MouseEnter:Connect(function()
-            tween(itemBtn, { BackgroundTransparency = 0.88 }, 0.1)
-        end)
-        itemBtn.MouseLeave:Connect(function()
-            tween(itemBtn, { BackgroundTransparency = 1 }, 0.1)
-        end)
+        create("UIPadding", { PaddingLeft = UDim.new(0, 12) }).Parent = itemBtn
+
+        -- Selected accent bar
+        local selBar = create("Frame", {
+            Size             = UDim2.new(0, 3, 0.6, 0),
+            Position         = UDim2.new(0, 0, 0.2, 0),
+            BackgroundColor3 = theme.accent,
+            BackgroundTransparency = item == selected and 0 or 1,
+            BorderSizePixel  = 0,
+            ZIndex           = 22,
+        }, { makeCorner(2) })
+        selBar.Parent = itemBtn
+
+        itemBtn.Parent = itemsContainer
+        itemBtn.MouseEnter:Connect(function() tween(itemBtn, { BackgroundTransparency = 0.9 }, 0.1); itemBtn.BackgroundColor3 = theme.accent end)
+        itemBtn.MouseLeave:Connect(function() tween(itemBtn, { BackgroundTransparency = 1 }, 0.1) end)
         itemBtn.MouseButton1Click:Connect(function()
-            selected = item
-            self._flags[flag] = item
-            valBtn.Text = item .. "  ▾"
-            listFrame.Visible = false
-            open = false
+            -- clear old selection bars
+            for _, b in ipairs(itemBtns) do
+                b.btn.TextColor3 = Color3.fromRGB(175,175,200)
+                b.bar.BackgroundTransparency = 1
+            end
+            selected = item; self._flags[flag] = item
+            valLabel.Text = item
+            itemBtn.TextColor3 = theme.accent
+            selBar.BackgroundTransparency = 0
+            listFrame.Visible = false; open = false
             pcall(callback, item)
         end)
+
+        table.insert(itemBtns, { btn = itemBtn, bar = selBar, name = item })
     end
+
+    -- Search filter
+    searchBox:GetPropertyChangedSignal("Text"):Connect(function()
+        local q = searchBox.Text:lower()
+        for _, entry in ipairs(itemBtns) do
+            entry.btn.Visible = entry.name:lower():find(q, 1, true) ~= nil
+        end
+    end)
 
     valBtn.MouseButton1Click:Connect(function()
         open = not open
         listFrame.Visible = open
+        if open then searchBox.Text = "" end
     end)
 
     return {
         Set = function(v)
-            selected = v
-            self._flags[flag] = v
-            valBtn.Text = v .. "  ▾"
-            pcall(callback, v)
+            selected = v; self._flags[flag] = v; valLabel.Text = v; pcall(callback, v)
         end,
         Get = function() return selected end,
     }
@@ -1000,48 +1216,50 @@ function NapoleonGUI:AddTextBox(section, opts)
 
     self._flags[flag] = opts.Default or ""
 
-    local row, theme = makeRow(section, 44)
+    local row, theme = makeRow(section, 46)
 
     create("TextLabel", {
         Text     = opts.Name or "Input",
-        Size     = UDim2.new(1, -14, 0, 18),
-        Position = UDim2.new(0, 14, 0, 4),
+        Size     = UDim2.new(1, -16, 0, 18),
+        Position = UDim2.new(0, 16, 0, 5),
         BackgroundTransparency = 1,
-        TextColor3 = Color3.fromRGB(208,208,232),
+        TextColor3 = Color3.fromRGB(200,200,220),
         TextXAlignment = Enum.TextXAlignment.Left,
         Font     = Enum.Font.Gotham,
         TextSize = 12,
     }).Parent = row
 
+    local inputBg = create("Frame", {
+        Size             = UDim2.new(1, -32, 0, 20),
+        Position         = UDim2.new(0, 16, 0, 22),
+        BackgroundColor3 = theme.inputBg,
+        BorderSizePixel  = 0,
+    }, { makeCorner(4) })
+    inputBg.Parent = row
+    local stroke = makeStroke(Color3.fromRGB(50,50,80), 1, 0.4)
+    stroke.Parent = inputBg
+
     local box = create("TextBox", {
         Text              = opts.Default or "",
-        PlaceholderText   = opts.Placeholder or "Type here...",
-        Size              = UDim2.new(1, -28, 0, 20),
-        Position          = UDim2.new(0, 14, 0, 22),
+        PlaceholderText   = opts.Placeholder or "Input Here",
+        Size              = UDim2.new(1, -10, 1, 0),
+        Position          = UDim2.new(0, 5, 0, 0),
         BackgroundTransparency = 1,
         TextColor3        = Color3.fromRGB(200,200,220),
-        PlaceholderColor3 = Color3.fromRGB(80,80,100),
+        PlaceholderColor3 = Color3.fromRGB(80,80,110),
         TextXAlignment    = Enum.TextXAlignment.Left,
         Font              = Enum.Font.Gotham,
-        TextSize          = 12,
+        TextSize          = 11,
         ClearTextOnFocus  = false,
         BorderSizePixel   = 0,
     })
-    box.Parent = row
-
-    local underline = create("Frame", {
-        Size     = UDim2.new(1, -28, 0, 1),
-        Position = UDim2.new(0, 14, 1, -3),
-        BackgroundColor3 = Color3.fromRGB(50, 50, 90),
-        BorderSizePixel = 0,
-    })
-    underline.Parent = row
+    box.Parent = inputBg
 
     box.Focused:Connect(function()
-        tween(underline, { BackgroundColor3 = theme.accent }, 0.18)
+        tween(stroke, { Color = theme.accent, Transparency = 0.3 }, 0.18)
     end)
     box.FocusLost:Connect(function(enter)
-        tween(underline, { BackgroundColor3 = Color3.fromRGB(50,50,90) }, 0.18)
+        tween(stroke, { Color = Color3.fromRGB(50,50,80), Transparency = 0.4 }, 0.18)
         self._flags[flag] = box.Text
         if enter then pcall(callback, box.Text) end
     end)
@@ -1059,13 +1277,11 @@ function NapoleonGUI:SetTheme(name)
     local t = THEMES[name]
     if not t then return end
     self.themeName = name
-    self.theme     = t
+    self.theme = t
     tween(self._main, { BackgroundColor3 = t.body }, 0.3)
-    self._badgeLabel.Text = name:upper()
-    tween(self._badgeLabel, { TextColor3 = t.accent }, 0.2)
-    if self._bigN then
-        tween(self._bigN, { TextColor3 = t.accent }, 0.3)
-    end
+    tween(self._sidebar, { BackgroundColor3 = t.sidebar }, 0.3)
+    self._logoSlash.TextColor3 = t.accent
+    if self._bigN then tween(self._bigN, { TextColor3 = t.accent }, 0.3) end
     if self._gradLeft then
         tween(self._gradLeft,   { BackgroundColor3 = t.body }, 0.3)
         tween(self._gradBottom, { BackgroundColor3 = t.body }, 0.3)
@@ -1074,13 +1290,12 @@ function NapoleonGUI:SetTheme(name)
 end
 
 -- ══════════════════════════════════════════════════════════════
---  FLAGS (read config values)
+--  FLAGS
 -- ══════════════════════════════════════════════════════════════
 function NapoleonGUI:GetFlag(key)
     return self._flags[key]
 end
 
--- ── THEME LIST ────────────────────────────────────────────────
 NapoleonGUI.Themes = THEMES
 
 return NapoleonGUI
